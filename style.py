@@ -43,6 +43,14 @@ div.st-by {
     color: white;
 }
 
+div.st-bz {
+    color: white;
+}
+
+div.st-d1 {
+    color: black;
+}
+
 div.st-cz {
     background-color: black;
 }
@@ -61,7 +69,15 @@ h4 {
     color: #af1102;
     letter-spacing: -0.04rem;
     word-spacing: 0.1rem;
-    padding-top:1.2rem;
+    padding-top:0.5rem;
+}
+
+h5 {
+    font-weight: 50;
+    color: #af1102;
+    letter-spacing: -0.04rem;
+    word-spacing: 0.1rem;
+    padding-top:0.7rem;
 }
 
 p {

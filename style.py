@@ -4,9 +4,6 @@ def get_css():
     return """
 <style>
 
-element.style.css-1lh9kog.e1fqkh3o10 {
-    width:35%;
-}
 
 div.css-hxt7ib {
     padding-top:2rem;
@@ -38,7 +35,11 @@ div.css-19qr612 {
     color: black;
 }
 
-div.st-bx {
+div.st-ci {
+   color: black;
+}
+
+div.st-by {
     color: white;
 }
 
@@ -51,9 +52,25 @@ div.css-12oz5g7 {
 }
 
 .css-1v0mbdj {
-    width: 60%;
+    width: 40%;
 
 }
+
+h4 {
+    font-weight: 150;
+    color: #af1102;
+    letter-spacing: -0.04rem;
+    word-spacing: 0.1rem;
+    padding-top:1.2rem;
+}
+
+p {
+    font-size: 1.2rem;
+    border: 1px solid rgba(12, 5, 7, 0.2);
+    border-radius: 0.5rem;
+    padding: calc(1em - 1px);
+}
+
 
 <style>
 """

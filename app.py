@@ -3,6 +3,7 @@ from PIL import Image
 from style import get_css
 import time
 import requests
+import yake
 
 
 ## API SETUP
@@ -25,13 +26,28 @@ def get_text_api():
     return response.text
 
 
+def get_keywords():
+
+    kw_extractor = yake.KeywordExtractor()
+    text = input1
+    language = "en"
+    max_ngram_size = 3
+    deduplication_threshold = 0.15
+    numOfKeywords = 8
+    custom_kw_extractor = yake.KeywordExtractor(lan=language, n=max_ngram_size, dedupLim=deduplication_threshold, top=numOfKeywords, features=None, stopwords=None)
+    keywords = custom_kw_extractor.extract_keywords(text)
+
+    keyword_list = [x[0] for x in keywords]
+
+    return keyword_list
+
 
 ## SITE CONFIG
 
 # set the config for the page. App themes in .streamlit/config.toml
 st.set_page_config(
             page_title="Plotify - create your story", # => Quick reference - Streamlit
-            page_icon="../assets/plotify_logo.png",
+            page_icon="../assets/plotify_logo_small.png",
             layout="wide", # wide
             initial_sidebar_state="expanded") # collapsed
 
@@ -87,33 +103,36 @@ st.image(image,  use_column_width=None)
 
 # Output 1: Summary Text
 st.markdown(''' # ''')
-placeholder = st.empty()
 
 
 with st.container():
 
+    # button selected
     if submitted:
+        # calls the first api to generate the output text
         with st.spinner("hold the pen, we're doing some plotting..."):
             output = get_text_api()
             if output:
-                st.markdown(''' #### 🎉 YIPPPEEE! plotify has got a story for you 👀 ''')
+                st.markdown(''' #### 🎉👀 YIPPPEEE!''')
+                st.markdown(''' ##### plotify has got a story for you:  ''')
                 st.write(output)
             else:
                 st.error("Hmm, i'm stumped for a plot, awks!😬")
 
+        st.markdown(''' # ''')
 
+        # generates two more columns for keywords and image generation
+        with st.container():
+            col1, col2 = st.columns([1,4])
 
+            # keyword generation
+            with col1:
+                if output:
+                    st.markdown(''' ##### your plot keywords: ''')
+                    output_topics = get_keywords()
+                    st.markdown(output_topics)
 
-# Output 2: Optionls (Titles, Topics, Pictures, MicroTwitter Story)
-
-st.markdown(''' # ''')
-
-with st.container():
-   col1, col2 = st.columns([1,2])
-
-   with col1:
-       st.markdown("Area: topis")
-
-
-   with col2:
-       st.markdown("Area: images")
+            # image generation
+            with col2:
+                if output:
+                    st.markdown("##### your plot images:")
